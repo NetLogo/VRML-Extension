@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<title>
+      NetLogo User Manual: VRML Extension
+    </title>
+    <link rel="stylesheet" href="netlogo.css" type="text/css">
+    <style type="text/css">
+p { margin-left: 1.5em ; }
+    h3 { font-size: 115% ; }
+    h4 { font-size: 100% ; margin-left: 1.5em ; background: white ; }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <h1>
+      VRML Extension
+    </h1>
+    <p>
+        The VRML extension allows you to build up 3D scenes and export them in VRML (or X3D) file format.
+        Currently it only provides basic support for a few 3D objects, but it could be extended to do more.
+        The VRML extension can be used both in Netlogo 2D and Netlogo 3D, although it is generally more effective when using NetLogo 3D.
+    
+    <h2>
+      How to use
+    </h2>
+    <p>
+     To use the VRML Extension in your model, add a line to the top of your procedures tab:
+    <pre>
+extensions [vrml]
+</pre>
+    <h2>
+      VRML extension Primitives
+    </h2>
+    <p>
+      <a href="#vrml:clear-scene">vrml:clear-scene</a> 
+      <a href="#vrml:set-color">vrml:set-color</a> 
+      <a href="#vrml:add-sphere">vrml:add-sphere</a> 
+      <a href="#vrml:add-box">vrml:add-box</a> 
+      <a href="#vrml:add-cylinder">vrml:add-cylinder</a> 
+      <a href="#vrml:save-scene">vrml:save-scene</a> 
+      <a href="#vrml:save-scene-x3d">vrml:save-scene-x3d</a> 
+   <h2>
+      Details
+    </h2>
+    <div class="dict_entry">
+      <h3>
+      <a name="vrml:clear-scene" id=
+        "vrml:clear-scene">vrml:clear-scene</a>
+      </h3>
+      <h4>
+        vrml:clear-scene
+      </h4>
+      <p>
+        clears the invisible scene that we are building up.
+      </div>
+
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:set-color" id=
+        "vrml:set-color">vrml:set-color</a>
+      </h3>
+      <h4>
+        vrml:set-color <i>R G B</i>
+      </h4>
+      <p>
+        Sets the active paint color to the color with the specified R G B component values (each component is between 0 and 255).  All shapes added to the scene after this call will be this color (until vrml:set-color is called again).
+      </div>
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:add-sphere" id="vrml:add-sphere">vrml:add-sphere</a>
+      </h3>
+      <h4>
+        vrml:add-sphere <i>X Y Z radius</i>
+      </h4>
+      <p>
+		adds a sphere of radius <i>radius</i> to the scene at the coordinates (<i>X</i>,<i>Y</i>,<i>Z</i>).
+     <pre>
+        example: ask turtles [ vrml:add-sphere xcor ycor zcor (size / 2) ]
+      </pre>
+      </div>
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:add-box" id="vrml:add-box">vrml:add-box</a>
+      </h3>
+      <h4>
+        vrml:add-box <i>X Y Z X-width Y-width Z-width</i>
+      </h4>
+      <p>
+		adds a rectangular prism to the scene centered at the coordinates (<i>X</i>,<i>Y</i>,<i>Z</i>), with the given dimensions (<i>X-width</i>, <i>Y-width</i>, <i>Z-width</i>).
+     <pre>
+        example: ask turtles [ vrml:add-box xcor ycor zcor 3 0.5 0.5 ]
+      </pre>
+      </div>
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:add-cylinder" id="vrml:add-cylinder">vrml:add-cylinder</a>
+      </h3>
+      <h4>
+        vrml:add-cylinder <i>X1 Y1 Z1 X2 Y2 Z2 radius</i>
+      </h4>
+      <p>
+		adds a cylinder to the scene, with the axis of the cylinder running from the coordinates (<i>X1</i>,<i>Y1</i>,<i>Z1</i>) to (<i>X2</i>,<i>Y2</i>,<i>Z2</i>), and with a given radius <i>radius</i>.
+     <pre>
+example: ask links [ 
+           vrml:add-cylinder [xcor] of end1 [ycor] of end1 [zcor] of end1
+                             [xcor] of end2 [ycor] of end2 [zcor] of end2
+                             0.5 
+         ]
+      </pre>
+      </div>
+
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:save-scene" id="vrml:save-scene">vrml:save-scene</a>
+      </h3>
+      <h4>
+        vrml:save-scene <i>filename</i>
+      </h4>
+      <p>
+        Saves/exports the currently built scene to a VRML file format, named <i>filename</i>.  
+        (Highly recommended that you give <i>filename</i> a ".wrl" extension, so that VRML viewers recognize it.)
+      <pre>
+        example: vrml:save-scene "MyCrazyShape.wrl"
+      </pre>
+      </div>
+    <div class="dict_entry">
+      <h3>
+        <a name="vrml:save-scene-x3d" id="vrml:save-scene-x3d">vrml:save-scene-x3d</a>
+      </h3>
+      <h4>
+        vrml:save-scene-x3d <i>filename</i>
+      </h4>
+      <p>
+        Saves/exports the currently built scene to an X3D file format, named <i>filename</i>. 
+      <pre>
+        example: vrml:save-scene "MyCrazyShape.x3d"
+      </pre>
+      </div>
+ 
+    <h2>
+      Credits:
+    </h2>
+    <p>The VMRL extension was written by Forrest Stonedahl.
+    <p>
+    This extension makes use of the third-party CyberX3D for Java library.
+	<p>
+Here is the license for the CyberX3D for Java Library:
+
+<pre> 
+Copyright (C) 1996-2003 Satoshi Konno 
+All rights reserved. 
+ 
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 
+ 
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.  
+ 
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation 
+and/or other materials provided with the distribution.   
+ 
+3. The name of the author may not be used to endorse or promote products derived from this software without specific prior written permission.   
+ 
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT 
+NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+SUCH DAMAGE.
+</pre>	

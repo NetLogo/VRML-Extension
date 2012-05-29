@@ -1,6 +1,16 @@
+# Emacs backup files #
+*~
+
+# compiled files #
 *.class
 
 # Package Files #
 *.jar
+*.jar.pack.gz
 *.war
 *.ear
+
+
+# specific files #
+
+vrml.zip
