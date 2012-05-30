@@ -2,14 +2,15 @@
 ;;; Setup Procedures ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 extensions [  vrml ]
-extensions [ palette ]
+;extensions [ palette ]
 
 to setup
-  ca
+  clear-all
   set-default-shape turtles "circle"
   ;; make the initial network of two turtles and an edge
   make-node nobody        ;; first node, unattached
   make-node turtle 0      ;; second node, attached to first node
+  reset-ticks
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -129,7 +130,8 @@ to shrink-network
 end
 
 to fancy-color
-  ask turtles [ set color palette:scale-gradient [[255 0 0 ] [0 0 255]] (ln count link-neighbors) -1 3]
+  user-message "the fancy-color freature would require the gradient extension, and uncommenting the following code."
+  ;ask turtles [ set color gradient:scale-gradient [[255 0 0 ] [0 0 255]] (ln count link-neighbors) -1 3]
 end
 
 to export-vrml
@@ -150,13 +152,14 @@ to export-vrml
                       [xcor] of end2 [ycor] of end2 [zcor] of end2
                       0.2
   ]
-  vrml:save-scene "C:\\prog\\workspace\\netlogo\\extensions\\vrml\\temp.wrl"
+  user-message "In the next step, save your file with a .WRL ending."
+  vrml:save-scene user-new-file
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 0
 0
-235
+245
 256
 22
 22
@@ -180,6 +183,7 @@ GRAPHICS-WINDOW
 1
 1
 ticks
+30.0
 
 PLOT
 8
@@ -195,8 +199,9 @@ log(# of nodes)
 0.3
 true
 false
+"" ""
 PENS
-"default" 1.0 2 -16777216 true
+"default" 1.0 2 -16777216 true "" ""
 
 PLOT
 8
@@ -212,8 +217,9 @@ degree
 10.0
 true
 false
+"" ""
 PENS
-"default" 1.0 1 -16777216 true
+"default" 1.0 1 -16777216 true "" ""
 
 BUTTON
 6
@@ -230,6 +236,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 93
@@ -246,6 +253,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 6
@@ -262,6 +270,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 SWITCH
 187
@@ -311,6 +320,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 115
@@ -327,12 +337,13 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
-134
-295
-365
-328
+343
+209
+574
+242
 NIL
 every 0.01 [\norbit-right 0.1\ndisplay\n]
 T
@@ -343,12 +354,13 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
-201
-364
-274
-397
+347
+259
+420
+292
 layout2
 layout-spring turtles links .5 0.5 0.3\n    display  ;; for smooth animation
 T
@@ -359,31 +371,46 @@ NIL
 NIL
 NIL
 NIL
+1
+
+BUTTON
+368
+357
+479
+390
+NIL
+export-vrml
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
-VERSION
--------
+## VERSION
+
 $Id: Preferential Attachment VRML.nlogo 41949 2009-01-16 19:24:08Z tisue $
 
+## WHAT IS IT?
 
-WHAT IS IT?
------------
 In some networks, a few "hubs" have lots of connections, while everybody else only has a few.  This model shows one way such networks can arise.
 
 Such networks can be found in a surprisingly large range of real world situations, ranging from the connections between websites to the collaborations between actors.
 
 This model generates these networks by a process of "preferential attachment", in which new network members prefer to make a connection to the more popular existing members.
 
+## HOW IT WORKS
 
-HOW IT WORKS
-------------
 The model starts with two nodes connected by an edge.
 
 At each step, a new node is added.  A new node picks an existing node to connect to randomly, but with some bias.  More specifically, a node's chance of being selected is directly proportional to the number of connections it already has, or its "degree." This is the mechanism which is called "preferential attachment."
 
+## HOW TO USE IT
 
-HOW TO USE IT
--------------
 Pressing the GO ONCE button adds one new node.  To continuously add nodes, press GO.
 
 The LAYOUT? switch controls whether or not the layout procedure is run.  This procedure attempts to move the nodes around to make the structure of the network easier to see.
@@ -396,59 +423,53 @@ If you want the model to run faster, you can turn off the LAYOUT? and PLOT? swit
 
 If you have LAYOUT? switched off, and then want the network to have a more appealing layout, press the REDO-LAYOUT button which will run the layout-step procedure until you press the button again. You can press REDO-LAYOUT at any time even if you had LAYOUT? switched on and it will try to make the network easier to see.
 
-THINGS TO NOTICE
-----------------
+## THINGS TO NOTICE
+
 The networks that result from running this model are often called "scale-free" or "power law" networks. These are networks in which the distribution of the number of connections of each node is not a normal distribution -- instead it follows what is a called a power law distribution.  Power law distributions are different from normal distributions in that they do not have a peak at the average, and they are more likely to contain extreme values (see Barabasi 2002 for a further description of the frequency and significance of scale-free networks).  Barabasi originally described this mechanism for creating networks, but there are other mechanisms of creating scale-free networks and so the networks created by the mechanism implemented in this model are referred to as Barabasi scale-free networks.
 
 You can see the degree distribution of the network in this model by looking at the plots. The top plot is a histogram of the degree of each node.  The bottom plot shows the same data, but both axes are on a logarithmic scale.  When degree distribution follows a power law, it appears as a straight line on the log-log plot.  One simple way to think about power laws is that if there is one node with a degree distribution of 1000, then there will be ten nodes with a degree distribution of 100, and 100 nodes with a degree distribution of 10.
 
+## THINGS TO TRY
 
-THINGS TO TRY
--------------
 Let the model run a little while.  How many nodes are "hubs", that is, have many connections?  How many have only a few?  Does some low degree node ever become a hub?  How often?
 
 Turn off the LAYOUT? switch and freeze the view to speed up the model, then allow a large network to form.  What is the shape of the histogram in the top plot?  What do you see in log-log plot? Notice that the log-log plot is only a straight line for a limited range of values.  Why is this?  Does the degree to which the log-log plot resembles a straight line grow as you add more node to the network?
 
+## EXTENDING THE MODEL
 
-EXTENDING THE MODEL
--------------------
 Assign an additional attribute to each node.  Make the probability of attachment depend on this new attribute as well as on degree.  (A bias slider could control how much the attribute influences the decision.)
 
 Can the layout algorithm be improved?  Perhaps nodes from different hubs could repel each other more strongly than nodes from the same hub, in order to encourage the hubs to be physically separate in the layout.
 
+## NETWORK CONCEPTS
 
-NETWORK CONCEPTS
-----------------
 There are many ways to graphically display networks.  This model uses a common "spring" method where the movement of a node at each time step is the net result of "spring" forces that pulls connected nodes together and repulsion forces that push all the nodes away from each other.  This code is in the layout-step procedure. You can force this code to execute any time by pressing the REDO LAYOUT button, and pressing it again when you are happy with the layout.
 
+## NETLOGO FEATURES
 
-NETLOGO FEATURES
-----------------
 Both nodes and edges are turtles.  Edge turtles have the "line" shape.  The edge turtle's SIZE variable is used to make the edge be the right length.
 
 Lists are used heavily in this model.  Each node maintains a list of its neighboring nodes.
 
+## RELATED MODELS
 
-RELATED MODELS
---------------
 See other models in the Networks section of the Models Library, such as Giant Component.
 
 See also Network Example, in the Code Examples section.
 
+## CREDITS AND REFERENCES
 
-CREDITS AND REFERENCES
-----------------------
-This model is based on:
+This model is based on:  
 Albert-Laszlo Barabasi. Linked: The New Science of Networks, Perseus Publishing, Cambridge, Massachusetts, pages 79-92.
 
-For a more technical treatment, see:
+For a more technical treatment, see:  
 Albert-Laszlo Barabasi & Reka Albert. Emergence of Scaling in Random Networks, Science, Vol 286, Issue 5439, 15 October 1999, pages 509-512.
 
 Barabasi's webpage has additional information at: http://www.nd.edu/~alb/
 
 The layout algorithm is based on the Fruchterman-Reingold layout algorithm.  More information about this algorithm can be obtained at: http://citeseer.ist.psu.edu/fruchterman91graph.html.
 
-For a model similar to the one described in the first extension, please consult:
+For a model similar to the one described in the first extension, please consult:  
 W. Brian Arthur, "Urban Systems and Historical Path-Dependence", Chapt. 4 in Urban systems and Infrastructure, J. Ausubel and R. Herman (eds.), National Academy of Sciences, Washington, D.C., 1988.
 @#$#@#$#@
 default
@@ -745,7 +766,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 3D 4.1pre1
+NetLogo 3D 5.0.1
 @#$#@#$#@
 set layout? false
 setup repeat 175 [ go ]
@@ -765,4 +786,6 @@ true
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 
+@#$#@#$#@
+0
 @#$#@#$#@

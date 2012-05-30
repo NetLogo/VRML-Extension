@@ -19,6 +19,7 @@ to setup
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
+  reset-ticks
   do-plotting
 end
 
@@ -205,8 +206,8 @@ to export-vrml
                       0.1
     
   ]
-
-  vrml:save-scene "/home/forrest/Desktop/ants.wrl"
+  user-message "In the next step, save the file with a .WRL extension."
+  vrml:save-scene user-new-file
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -234,6 +235,7 @@ GRAPHICS-WINDOW
 1
 1
 ticks
+30.0
 
 BUTTON
 30
@@ -250,6 +252,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 SLIDER
 15
@@ -296,6 +299,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 SWITCH
 85
@@ -337,47 +341,60 @@ food
 120.0
 true
 false
+"" ""
 PENS
-"food-in-pile1" 1.0 0 -11221820 true
-"food-in-pile2" 1.0 0 -13791810 true
-"food-in-pile3" 1.0 0 -13345367 true
+"food-in-pile1" 1.0 0 -11221820 true "" ""
+"food-in-pile2" 1.0 0 -13791810 true "" ""
+"food-in-pile3" 1.0 0 -13345367 true "" ""
+
+BUTTON
+57
+467
+168
+500
+NIL
+export-vrml
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
-VERSION
--------
+## VERSION
+
 $Id: Ants - vrml.nlogo 44666 2009-10-22 17:59:12Z tisue $
 
+## WHAT IS IT?
 
-WHAT IS IT?
------------
 In this project, a colony of ants forages for food. Though each ant follows a set of simple rules, the colony as a whole acts in a sophisticated way.
 
+## HOW IT WORKS
 
-HOW IT WORKS
-------------
 When an ant finds a piece of food, it carries the food back to the nest, dropping a chemical as it moves. When other ants "sniff" the chemical, they follow the chemical toward the food. As more ants carry food to the nest, they reinforce the chemical trail.
 
+## HOW TO USE IT
 
-HOW TO USE IT
--------------
 Click the SETUP button to set up the ant nest (in violet, at center) and three piles of food. Click the GO button to start the simulation. The chemical is shown in a green-to-white gradient.
 
 The EVAPORATION-RATE slider controls the evaporation rate of the chemical. The DIFFUSION-RATE slider controls the diffusion rate of the chemical. There is an on-off PLOT? switch.  Turning off the plotting lets the model run faster.
 
 If you want to change the number of ants, move the POPULATION slider before pressing SETUP.
 
+## THINGS TO NOTICE
 
-THINGS TO NOTICE
-----------------
 The ant colony generally exploits the food source in order, starting with the food closest to the nest, and finishing with the food most distant from the nest. It is more difficult for the ants to form a stable trail to the more distant food, since the chemical trail has more time to evaporate and diffuse before being reinforced.
 
 Once the colony finishes collecting the closest food, the chemical trail to that food naturally disappears, freeing up ants to help collect the other food sources. The more distant food sources require a larger "critical number" of ants to form a stable trail.
 
 The consumption of the food is shown in a plot.  The line colors in the plot match the colors of the food piles.
 
+## EXTENDING THE MODEL
 
-EXTENDING THE MODEL
--------------------
 Try different placements for the food sources. What happens if two food sources are equidistant from the nest? When that happens in the real world, ant colonies typically exploit one source then the other (not at the same time).
 
 In this project, the ants use a "trick" to find their way back to the nest: they follow the "nest scent." Real ants use a variety of different approaches to find their way back to the nest. Try to implement some alternative strategies.
@@ -386,16 +403,13 @@ The ants only respond to chemical levels between 0.05 and 2.  The lower limit is
 
 In the UPHILL-CHEMICAL procedure, the ant "follows the gradient" of the chemical. That is, it "sniffs" in three directions, then turns in the direction where the chemical is strongest. You might want to try variants of the UPHILL-CHEMICAL procedure, changing the number and placement of "ant sniffs."
 
+## NETLOGO FEATURES
 
-NETLOGO FEATURES
-----------------
 The built-in DIFFUSE primitive lets us diffuse the chemical easily without complicated code.
 
 The primitive PATCH-RIGHT-AND-AHEAD is used so to make the ants smell in different directions without actually turning.
 
-
-CREDITS AND REFERENCES
-----------------------
+## CREDITS AND REFERENCES
 @#$#@#$#@
 default
 true
@@ -680,7 +694,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 4.1RC5
+NetLogo 5.0.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

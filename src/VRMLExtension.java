@@ -33,6 +33,7 @@ to export-vrml
   vrml:save-scene "network.wrl"
 end
  */
+package org.nlogo.extensions.vrml;
 
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
