@@ -29,6 +29,6 @@ vrml.zip: vrml.jar
 	rm -rf vrml
 	mkdir vrml
 	cp -rp vrml.jar vrml.jar.pack.gz cx3djava100a.jar cx3djava100a.jar.pack.gz README.md Makefile src manifest.txt vrml
-	zip -rv vrml.zip vrml
+	zip -rv vrml.zip vrml *.nlogo*
 	rm -rf vrml
 
