@@ -29,11 +29,11 @@ This extension was written by Forrest Stonedahl.
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-The NetLogo matrix extension is in the public domain.  To the extent possible under law, Forrest Stonedahl has waived all copyright and related or neighboring rights.
+The NetLogo VRML extension is in the public domain.  To the extent possible under law, Forrest Stonedahl has waived all copyright and related or neighboring rights.
 
 ## Terms of Use for Bundled Library
 
-The vrml extension makes use of (and is distributed with) the "CyberX3D for Java" library (cx3djava100a.jar), which is distributed under the following license:
+The VRML extension makes use of (and is distributed with) the "CyberX3D for Java" library (cx3djava100a.jar), which is distributed under the following license:
 
 Copyright (C) 1996-2003 Satoshi Konno 
 All rights reserved. 
