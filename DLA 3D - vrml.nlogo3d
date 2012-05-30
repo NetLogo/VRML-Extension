@@ -202,7 +202,7 @@ BUTTON
 362
 229
 gradient-color
-user-message \"for this feature, you would need the gradient extension (and to uncomment this button's code.)\"\n;ask patches with [ pcolor != black ] [ \n;set pcolor palette:scale-gradient [[255 0 0] [255 255 0] [0 255 0] [0 0 255] [255 0 255]] \n;                (distancexyz 0 0 0) 0 9\n;]
+user-message \"for this feature, you would need the gradient extension (and to uncomment this button's code.)\"\n;ask patches with [ pcolor != black ] [ \n;set pcolor gradient:scale [[255 0 0] [255 255 0] [0 255 0] [0 0 255] [255 0 255]] \n;                (distancexyz 0 0 0) 0 9\n;]
 NIL
 1
 T

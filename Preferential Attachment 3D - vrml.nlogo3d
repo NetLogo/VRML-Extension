@@ -131,7 +131,7 @@ end
 
 to fancy-color
   user-message "the fancy-color freature would require the gradient extension, and uncommenting the following code."
-  ;ask turtles [ set color gradient:scale-gradient [[255 0 0 ] [0 0 255]] (ln count link-neighbors) -1 3]
+  ;ask turtles [ set color gradient:scale [[255 0 0 ] [0 0 255]] (ln count link-neighbors) -1 3]
 end
 
 to export-vrml
